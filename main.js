@@ -201,7 +201,7 @@ downloadCV.addEventListener('click', function (e) {
 
     // Create a link to the PDF file
     const a = document.createElement('a');
-    a.href = './portfolio-website/assets/Resume.pdf'; // path to your PDF
+    a.href = 'public/Resume.pdf'; // path to your PDF
     a.download = 'Resume'; // name the downloaded file
     document.body.appendChild(a);
     a.click();
