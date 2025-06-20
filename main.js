@@ -193,25 +193,150 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
+// Generate CV content function
+function generateCVContent() {
+    return `DAGIM TAMIRAT
+Computer Science Student & Aspiring Web Developer
+
+CONTACT INFORMATION
+Email: dagimt369@gmail.com
+Phone: +251 993 941 832
+Location: Addis Ababa, Ethiopia
+GitHub: https://github.com/dagiz6
+LinkedIn: https://www.linkedin.com/in/dagiz6/
+Instagram: https://www.instagram.com/dagiz_6/
+
+EDUCATION
+Bachelor of Science in Computer Science
+Jimma University (2023 - Present)
+- Focus on software development, database management, network security, and system analysis
+- Active participation in coding competitions and tech clubs
+- Strong academic performance with emphasis on practical application
+
+TECHNICAL SKILLS
+
+Programming Languages:
+- JavaScript, TypeScript, Java, C++, PHP, SQL
+
+Web Technologies:
+- HTML5, CSS3, React, Next.js, Express.js, Node.js
+
+Tools & Frameworks:
+- Git, VS Code, Tailwind CSS, Bootstrap, Zustand
+
+Other Skills:
+- Problem Solving, Team Collaboration, Agile Methodology
+- Project Management, Technical Writing
+
+PROJECTS
+
+Netflix Clone
+- Responsive Netflix-inspired streaming platform built with React
+- Features user authentication, movie browsing, and trailer previews
+- Integrated Firebase for authentication and TMDB API for dynamic content
+- Technologies: React, Node.js, MySQL, Bootstrap
+- GitHub: https://github.com/dagiz6/netflix-clone
+
+Donation App
+- Secure donation platform developed with React
+- Seamless contribution via Chapa payment gateway
+- Real-time transaction tracking and user-friendly UI
+- Technologies: React, Chapa API, Node.js, Tailwind
+- GitHub: https://github.com/dagiz6/donation-web-app
+
+E-menu
+- Digital restaurant menu built with React
+- Interactive interface for browsing food items
+- Category filtering and elegant UI
+- Technologies: React, CSS3, JavaScript
+- GitHub: https://github.com/dagiz6/E-menu
+
+Event Registration System
+- PHP-based event registration system
+- Secure login/logout functionality
+- Automated email confirmations via EmailJS
+- Technologies: PHP, EmailJS, CSS, JavaScript
+- GitHub: https://github.com/dagiz6/event-registration
+
+Tic-Tac-Toe App
+- Classic Tic-Tac-Toe game built with JavaScript
+- Interactive gameplay and engaging UI
+- Two-player mode with instant win detection
+- Technologies: HTML5, CSS3, JavaScript
+- GitHub: https://github.com/dagiz6/PRODIGY_WD_03
+
+Weather App
+- Minimalistic weather application using vanilla JavaScript
+- Real-time weather data via API integration
+- Clean UI displaying temperature, humidity, and forecasts
+- Technologies: HTML5, CSS3, JavaScript
+- GitHub: https://github.com/dagiz6/PRODIGY_WD_05
+
+ABOUT ME
+I'm a dedicated Computer Science student at Jimma University with a passion for technology and innovation. My journey in computing began with curiosity about how software works and has evolved into a deep commitment to building meaningful digital solutions.
+
+Throughout my studies, I've developed a strong foundation in programming, web development, and software engineering principles. I believe in the power of technology to solve real-world problems and improve people's lives.
+
+When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, collaborating with fellow students on innovative projects, or playing chess. I'm always eager to learn and take on new challenges.
+
+ACHIEVEMENTS
+- 6+ Projects Completed
+- 3+ Years of Study
+- 8+ Technologies Learned
+- Active contributor to open-source projects
+- Strong problem-solving and analytical skills
+- Excellent team collaboration abilities
+
+INTERESTS
+- Web Development
+- Software Engineering
+- Open Source Contribution
+- Chess
+- Technology Innovation
+- Continuous Learning
+
+Generated on: ${new Date().toLocaleDateString()}
+`;
+}
+
 // CV download functionality
 const downloadCV = document.getElementById('download-cv');
 
 downloadCV.addEventListener('click', function (e) {
     e.preventDefault();
 
-    // Create a link to the PDF file
-    const a = document.createElement('a');
-    a.href = 'public/Resume.pdf'; // path to your PDF
-    a.download = 'Resume'; // name the downloaded file
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    showNotification('CV downloaded successfully!', 'success');
+    try {
+        // Generate CV content
+        const cvContent = generateCVContent();
+        
+        // Create blob with CV content
+        const blob = new Blob([cvContent], { type: 'text/plain;charset=utf-8' });
+        
+        // Create download URL
+        const url = window.URL.createObjectURL(blob);
+        
+        // Create temporary download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = 'Dagim_Tamirat_CV.txt';
+        downloadLink.style.display = 'none';
+        
+        // Add to DOM, click, and remove
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        // Clean up the URL object
+        window.URL.revokeObjectURL(url);
+        
+        // Show success notification
+        showNotification('CV downloaded successfully!', 'success');
+        
+    } catch (error) {
+        console.error('Error downloading CV:', error);
+        showNotification('Error downloading CV. Please try again.', 'error');
+    }
 });
-
-
-
 
 // Typing animation for hero section
 const heroTitle = document.querySelector('.hero-title');
@@ -220,10 +345,10 @@ let index = 0;
 
 function typeWriter() {
     if (index < text.length) {
-        if (text.substring(index, index + 9) === 'Dagim Tamirat') {
+        if (text.substring(index, index + 13) === 'Dagim Tamirat') {
             heroTitle.innerHTML = text.substring(0, index) + 
                 '<span class="highlight">' + 'Dagim Tamirat' + '</span>';
-            index += 9;
+            index += 13;
         } else {
             heroTitle.innerHTML = text.substring(0, index + 1);
             index++;
@@ -231,7 +356,6 @@ function typeWriter() {
         setTimeout(typeWriter, 100);
     }
 }
-
 
 // Initialize typing animation after page load
 window.addEventListener('load', () => {

@@ -404,31 +404,5 @@
     </footer>
 
     <script src="main.js"></script>
-
-    <!-- EmailJS Script (in HTML head or before </body>) -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function () {
-    require('dotenv').config();
-    const publicKey = process.env.PUBLIC_KEY; // Replace with your EmailJS public key
-    emailjs.init(publicKey); // Replace with your EmailJS public key
-  })();
-</script>
-
-    <script>
-        require('dotenv').config();
-        const serviceKey = process.env.SERVICE_KEY; // Replace with your EmailJS service key
-        const templateKey = process.env.TEMPLATE_KEY; // Replace with your EmailJS template
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            emailjs.sendForm(serviceKey, templateKey, this)
-                .then(function() {
-                    alert('Message sent successfully!');
-                }, function(error) {
-                    alert('Failed to send message. Please try again later.');
-                });
-        });
-    </script>
-
 </body>
 </html>
