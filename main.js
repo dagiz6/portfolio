@@ -200,6 +200,19 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
+// CV download functionality
+const downloadCV = document.querySelector('a[download]');
+
+if (downloadCV) {
+    downloadCV.addEventListener('click', function (e) {
+        // Let the browser handle the download naturally
+        // Show success notification after a brief delay
+        setTimeout(() => {
+            showNotification('CV download started!', 'success');
+        }, 100);
+    });
+}
+
 // Typing animation for hero section
 const heroTitle = document.querySelector('.hero-title');
 const text = "Hi, I'm Dagim Tamirat";
