@@ -1,22 +1,61 @@
-// Theme management
+// Enhanced theme management with system preference detection
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check for saved theme preference or default to light
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
+// Function to get system theme preference
+function getSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+}
 
+// Function to apply theme
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+}
+
+// Initialize theme on page load
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+        // User has manually set a theme before, use that
+        applyTheme(savedTheme);
+    } else {
+        // First visit, use system preference
+        const systemTheme = getSystemTheme();
+        applyTheme(systemTheme);
+    }
+}
+
+// Listen for system theme changes
+if (window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    mediaQuery.addEventListener('change', (e) => {
+        // Only auto-switch if user hasn't manually set a preference
+        const savedTheme = localStorage.getItem('theme');
+        if (!savedTheme) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            applyTheme(newTheme);
+        }
+    });
+}
+
+// Manual theme toggle
 themeToggle.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
     
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
+    // Show notification about manual override
+    showNotification(`Switched to ${newTheme} mode`, 'info');
 });
+
+// Initialize theme when page loads
+initializeTheme();
 
 // Mobile navigation toggle
 const hamburger = document.querySelector('.hamburger');
