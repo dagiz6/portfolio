@@ -450,14 +450,11 @@
             });
         }
 
-        // Manual theme toggle
+        // Manual theme toggle (removed notification)
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
-            
-            // Show notification about manual override
-            showNotification(`Switched to ${newTheme} mode`, 'info');
         });
 
         // Initialize theme when page loads
