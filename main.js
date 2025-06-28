@@ -200,33 +200,6 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// CV download functionality
-const downloadCV = document.getElementById('download-cv');
-
-downloadCV.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    try {
-        // Create a link to the PDF file
-        const downloadLink = document.createElement('a');
-        downloadLink.href = '/Resume.pdf'; // Path to your PDF file in the public folder
-        downloadLink.download = 'Dagim_Tamirat_Resume.pdf'; // Name for the downloaded file
-        downloadLink.style.display = 'none';
-        
-        // Add to DOM, click, and remove
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        
-        // Show success notification
-        showNotification('CV downloaded successfully!', 'success');
-        
-    } catch (error) {
-        console.error('Error downloading CV:', error);
-        showNotification('Error downloading CV. Please try again.', 'error');
-    }
-});
-
 // Typing animation for hero section
 const heroTitle = document.querySelector('.hero-title');
 const text = "Hi, I'm Dagim Tamirat";
