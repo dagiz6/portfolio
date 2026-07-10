@@ -1,10 +1,10 @@
 :root {
   /* Light theme colors */
-  --primary-color: #3B82F6;
-  --secondary-color: #1E40AF;
-  --accent-color: #F59E0B;
+  --primary-color: #14B8A6;
+  --secondary-color: #047857;
+  --accent-color: #84CC16;
   --success-color: #10B981;
-  --warning-color: #F59E0B;
+  --warning-color: #84CC16;
   --error-color: #EF4444;
   
   --bg-primary: #FFFFFF;
@@ -811,7 +811,7 @@ section {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.14);
 }
 
 .form-group textarea {
